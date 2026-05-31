@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌴 제주도 2박 3일 남부/동부 액티비티 여행 계획 - Notion</title>
+  <meta name="description" content="제주 남부(중문, 서귀포)와 동부(구좌읍)의 액티비티 및 히든클리프 & 삼일삼오 민박 중심 2박 3일 여행 플래너. 예산 계산기, 준비물 체크리스트, Leaflet 지도 연동 포함.">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Leaflet JS & CSS for Interactive Mapping -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+
+  <!-- Sidebar Toggle Button (Mobile) -->
+  <button id="sidebarToggleBtn" class="sidebar-toggle-btn" aria-label="사이드바 토글">
+    ☰
+  </button>
+
+  <div class="app-container">
+    
+    <!-- NOTION SIDEBAR -->
+    <aside id="appSidebar" class="sidebar">
+      <div class="sidebar-header">
+        <span class="card-emoji">✈️</span>
+        <div class="sidebar-title-wrapper">
+          <span class="sidebar-title">Jeju Trip 2026</span>
+          <span class="sidebar-subtitle">7/28 (화) ~ 7/30 (목)</span>
+        </div>
+      </div>
+      
+      <nav>
+        <ul class="sidebar-menu">
+          <li class="menu-item active" data-tab="timeline" id="menuItemTimeline">
+            <span class="menu-item-icon">📌</span>
+            <span>일정 타임라인</span>
+          </li>
+          <li class="menu-item" data-tab="budget" id="menuItemBudget">
+            <span class="menu-item-icon">💰</span>
+            <span>실시간 가계부</span>
+          </li>
+          <li class="menu-item" data-tab="checklist" id="menuItemChecklist">
+            <span class="menu-item-icon">🎒</span>
+            <span>준비물 체크리스트</span>
+          </li>
+          <li class="menu-item" data-tab="food" id="menuItemFood">
+            <span class="menu-item-icon">🍽️</span>
+            <span>맛집 & 카페 보드</span>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button id="themeToggleBtn" class="theme-toggle-btn">
+          <span id="themeToggleIcon">🌙</span> <span id="themeToggleText">다크 모드</span>
+        </button>
+        <div class="footer-credits">
+          Made for Jeju Adventurers 🌴
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN MAIN AREA -->
+    <main class="main-content">
+      
+      <!-- COVER PICTURE -->
+      <div class="notion-cover">
+        <img src="jeju_cover.png" alt="제주 남부 해안 커버 이미지" class="notion-cover-img">
+      </div>
+      
+      <!-- HEADER & TITLE -->
+      <div class="notion-header-container">
+        <div class="notion-page-icon-wrapper">
+          <span>🌴</span>
+        </div>
+        
+        <div class="notion-title-block">
+          <h1 class="notion-title">제주도 2박 3일 남부/동부 액티비티 여행</h1>
+          <div class="notion-metadata">
+            <div class="metadata-item">
+              <span class="metadata-icon">📅</span>
+              <span>일시: 2026년 7월 28일 ~ 30일 (2박 3일)</span>
+            </div>
+            <div class="metadata-item">
+              <span class="metadata-icon">🏨</span>
+              <span>숙소: 히든클리프(중문) & 삼일삼오 민박(구좌)</span>
+            </div>
+            <div class="metadata-item">
+              <span class="metadata-icon">🏎️</span>
+              <span>테마: 남서부 액티비티 -> 동부 올레 힐링</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN PAGE BODY -->
+      <div class="notion-body">
+        
+        <!-- Welcome Callout -->
+        <div class="notion-callout">
+          <div class="notion-callout-icon">💡</div>
+          <div class="notion-callout-text">
+            <div class="notion-callout-title">여행 정보 요약 & 팁</div>
+            <div>커플 또는 친구와 함께 1일차는 중문에서 호캉스(히든클리프 온수 인피니티 풀)를 즐기고, 2일차 아침 강정교 계곡(천) 물놀이를 거쳐 제주 동부(구좌읍)로 이동하면서 다이나믹 메이즈와 레일바이크 레저를 즐긴 뒤, 구좌읍의 감성 가득한 '삼일삼오 민박'에 머무르는 알찬 코스입니다.</div>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 1: TIMELINE ==================== -->
+        <div id="tabPanelTimeline" class="tab-panel active">
+          
+          <h2 class="notion-h1">🗺️ 이동 경로 지도</h2>
+          <div class="map-section-wrapper" style="margin-bottom: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <span style="font-size: 13px; font-weight: 500; color: var(--text-muted);">지도의 마커를 클릭하면 장소 정보를 확인하실 수 있습니다.</span>
+              <div class="map-filter-tabs" style="display: flex; gap: 4px; background: var(--sidebar-bg); border: 1px solid var(--border-color); padding: 3px; border-radius: 6px;">
+                <button class="map-filter-btn active" data-map-day="all" id="btnMapAll" style="border:none; padding: 4px 10px; font-size:11px; font-weight:600; border-radius:4px; cursor:pointer;">전체</button>
+                <button class="map-filter-btn" data-map-day="1" id="btnMap1" style="border:none; padding: 4px 10px; font-size:11px; font-weight:600; border-radius:4px; cursor:pointer;">Day 1</button>
+                <button class="map-filter-btn" data-map-day="2" id="btnMap2" style="border:none; padding: 4px 10px; font-size:11px; font-weight:600; border-radius:4px; cursor:pointer;">Day 2</button>
+                <button class="map-filter-btn" data-map-day="3" id="btnMap3" style="border:none; padding: 4px 10px; font-size:11px; font-weight:600; border-radius:4px; cursor:pointer;">Day 3</button>
+              </div>
+            </div>
+            <!-- LEAFLET MAP ELEMENT -->
+            <div id="routeMap" style="height: 380px; width: 100%; border-radius: 8px; border: 1px solid var(--border-color); z-index: 10;"></div>
+          </div>
+
+          <h2 class="notion-h1">📌 2박 3일 상세 일정표</h2>
+          
+          <div class="timeline-container">
+            
+            <!-- DAY 1 -->
+            <section class="timeline-day-section">
+              <div class="timeline-day-header">
+                <span class="day-badge">Day 1</span>
+                <span class="day-title">제주공항 도착 & 중문 힐링</span>
+                <span class="day-date">(7월 28일 화요일)</span>
+              </div>
+              
+              <div class="timeline-items">
+                
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">✈️</span>
+                        <span class="card-time">11:00</span>
+                        <span class="card-title">제주국제공항 도착 및 렌터카 인수</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-green">이동</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">비행기 탑승 및 제주 도착 후 공항 셔틀버스를 통해 렌터카 차고지로 이동하여 완전자차 차량을 인수합니다. 중문 방향 평화로를 타고 남쪽으로 이동을 시작합니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🚗 차량 인수 후 중문으로 출발</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 제주공항 네이버지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🍜</span>
+                        <span class="card-time">12:30</span>
+                        <span class="card-title">점심 식사 - 제주 하갈비국수 (애월 해안)</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-red">식사</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">하귀-애월 해안도로를 따라 이동하며 드넓은 바다 뷰를 품고 제주산 돔베고기가 듬뿍 올라간 뜨끈하고 시원한 고기국수를 맛봅니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">💡 대표메뉴: 고기국수, 갈비비빔국수</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 하갈비국수 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🏨</span>
+                        <span class="card-time">14:30</span>
+                        <span class="card-title">히든클리프 호텔 & 네이쳐 체크인</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-blue">숙소</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">숲에 둘러싸여 웅장한 원시림의 자연미를 선사하는 중문 히든클리프 호텔에 체크인하고 여유롭게 휴식할 옷차림과 수영복을 챙깁니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🌲 디럭스 트윈 / 더블 계곡뷰</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 히든클리프 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🏊</span>
+                        <span class="card-time">15:00</span>
+                        <span class="card-title">사계절 온수 인피니티 풀 물놀이</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-purple">액티비티</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">자연림 계곡 위에서 공중에 뜬 듯한 환상적인 인피니티 리버 풀에서 물놀이를 즐기며 커플 감성 사진을 남기고 힐링합니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">💡 투숙객 전용 무료 인피니티풀</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🥩</span>
+                        <span class="card-time">18:30</span>
+                        <span class="card-title">저녁 식사 - 숙성도 중문점</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-red">식사</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">중문 관광단지 입구의 초인기 흑돼지 전문점에서 숙성 흑돼지구이와 명란 멜젓 소스 등 제주의 깊은 육즙을 즐깁니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🔥 대기시간이 발생할 수 있으니 사전 모바일 대기 적극 활용</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 숙성도 중문점 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- DAY 2 -->
+            <section class="timeline-day-section">
+              <div class="timeline-day-header">
+                <span class="day-badge">Day 2</span>
+                <span class="day-title">강정교 계곡 물놀이 & 동부 로드트립 액티비티 & 삼일삼오 민박</span>
+                <span class="day-date">(7월 29일 수요일)</span>
+              </div>
+              
+              <div class="timeline-items">
+                
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🍳</span>
+                        <span class="card-time">08:30</span>
+                        <span class="card-title">히든클리프 호텔 조식 뷔페 식사</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-red">식사</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">히든클리프 파노라마 레스토랑에서 숲속 조망과 함께 정갈하게 준비된 호텔 조식 뷔페를 든든하게 먹어 에너지를 보충합니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">💡 조식 이용 가능 시간: 07:30 ~ 10:30</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🍉</span>
+                        <span class="card-time">10:00</span>
+                        <span class="card-title">강정교 (강정천) 계곡 물놀이 & 수박 힐링</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-purple">액티비티</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">은어들이 사는 맑고 투명한 서귀포의 명소 강정천으로 이동합니다. 차가운 민물이 솟아나는 강정교 아래 그늘에서 발을 담그고, 준비해 간 시원한 수박을 먹으며 천연 자연 물놀이를 만끽합니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🍉 돗자리, 수건 및 시원한 수박(커팅/과일박스) 사전 준비 권장</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 강정교 네이버지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🍜</span>
+                        <span class="card-time">12:30</span>
+                        <span class="card-title">점심 식사 - 삼보식당 (서귀포 시내)</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-red">식사</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">물놀이 후 허기진 배를 달래기 위해 뚝배기 해물탕과 옥돔구이로 정평이 나 있는 서귀포의 로컬 노포 한식당에서 식사합니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🐟 추천: 해물뚝배기, 자리물회, 갈치조림</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 삼보식당 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🏃</span>
+                        <span class="card-time">14:30</span>
+                        <span class="card-title">다이나믹 메이즈 제주 (표선) - 실내 방탈출 레이스</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-purple">액티비티</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">동쪽 구좌읍으로 향하는 중간 거점인 표선에 위치한 액티브 실내 장애물 탈출 게임! 서로 머리와 몸을 써서 미로를 빠져나가고 미션을 클리어하는 커플/친구 추천 이색 액티비티입니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">👟 바지 착용 및 양말 필수 착용 권장</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 다이나믹메이즈 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🚲</span>
+                        <span class="card-time">16:30</span>
+                        <span class="card-title">제주 레일바이크 (구좌읍) - 오름 경치 레일 주행</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-purple">액티비티</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">구좌읍 종달리에 위치한 레일바이크. 사방으로 뻗은 용눈이오름과 다랑쉬오름의 시원한 들판 경치를 편안하게 반자동 페달 레일카로 주행하며 구경합니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🚲 2인승/4인승 레일바이크 운행</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 제주레일바이크 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🏡</span>
+                        <span class="card-time">18:00</span>
+                        <span class="card-title">구좌읍 삼일삼오(3135) 민박 체크인</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-blue">숙소</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">구좌읍 한적한 시골 마을에 있는 아늑하고 감성 가득한 독채 돌담 민박 '삼일삼오'에 체크인합니다. 평화로운 마당과 빈티지한 우드톤 객실에서 여유를 만끽합니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🔑 돌담과 소담한 인테리어가 매력적인 감성 숙소</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 삼일삼오 민박 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🐙</span>
+                        <span class="card-time">19:00</span>
+                        <span class="card-title">저녁 식사 - 구좌 평대리 벵디 (또는 돌문어덮밥)</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-red">식사</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">구좌읍 세화/평대 해안도로변에 위치한 벵디에서 쫄깃한 돌문어덮밥과 돌문어물회 등을 해안의 석양 뷰와 함께 편안히 식사합니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🐙 추천: 돌문어 덮밥, 뿔소라 톳덮밥</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 평대 벵디 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- DAY 3 -->
+            <section class="timeline-day-section">
+              <div class="timeline-day-header">
+                <span class="day-badge">Day 3</span>
+                <span class="day-title">동부 투어 & 해양 레저 및 공항 복귀</span>
+                <span class="day-date">(7월 30일 목요일)</span>
+              </div>
+              
+              <div class="timeline-items">
+                
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🍜</span>
+                        <span class="card-time">09:30</span>
+                        <span class="card-title">아침 식사 - 세화리 보말칼국수</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-red">식사</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">삼일삼오 민박 퇴실을 준비하며 구좌읍 세화항 부근 보말칼국수 전문점에서 바다향 가득한 진한 국물로 가볍고 개운하게 식사합니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">💡 대표메뉴: 보말칼국수, 보말전</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🛶</span>
+                        <span class="card-time">11:00</span>
+                        <span class="card-title">하도 해수욕장 - 투명카약 및 패들보드 해양 레저</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-purple">액티비티</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">수심이 얕고 에메랄드빛 바다로 유명한 구좌읍 하도해수욕장 카약체험장에서 투명카약 또는 스탠드업 패들보드(SUP)를 타며 바닷속 모래가 비치는 투명한 물결 위를 노 저으며 레저를 즐깁니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🛶 여벌 옷과 젖어도 되는 아쿠아슈즈 지참 권장</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 하도해변 카약체험 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">🍲</span>
+                        <span class="card-time">13:00</span>
+                        <span class="card-title">점심 식사 - 명진전복 (구좌읍 평대리)</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-red">식사</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">전국에서 가장 유명한 전복돌솥밥 맛집 중 하나. 갓 지어낸 뜨끈한 돌솥 전복밥에 숭늉을 붓고 고소한 버터 향 가득한 전복구이를 함께 맛봅니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🔥 추천메뉴: 전복돌솥밥, 전복구이</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 명진전복 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">☕</span>
+                        <span class="card-time">15:00</span>
+                        <span class="card-title">카페 투어 - 카페 델문도 (함덕 해수욕장)</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-orange">카페</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">공항으로 올라가는 길목에 있는 함덕 해변의 대표 카페. 모래사장 바로 옆 바다 전망 테라스 빈백에 기대앉아 커피와 시그니처 빵을 곁들이며 여행 마지막의 아쉬움을 달랩니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🍰 시그니처: 함덕 에이드, 한라산 팡도르</span>
+                      <a href="https://map.naver.com" target="_blank" class="map-btn">📍 델문도 지도</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-item-marker"></div>
+                  <div class="timeline-card">
+                    <div class="card-header">
+                      <div class="card-title-group">
+                        <span class="card-emoji">✈️</span>
+                        <span class="card-time">16:30</span>
+                        <span class="card-title">제주공항 이동 및 렌터카 반납 후 출발</span>
+                      </div>
+                      <div class="card-tags">
+                        <span class="notion-tag tag-green">이동</span>
+                      </div>
+                    </div>
+                    <p class="card-desc">조천/삼양을 거쳐 제주공항 인근의 렌터카 사무실에 도착하여 차량을 안전하게 반납하고 셔틀버스를 타고 터미널로 복귀, 서울행 비행기에 탑승합니다.</p>
+                    <div class="card-footer">
+                      <span class="card-meta-detail">🚗 함덕 -> 공항 차량 이동 약 35분 소요</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+          </div>
+        </div>
+
+        <!-- ==================== TAB 2: BUDGET ==================== -->
+        <div id="tabPanelBudget" class="tab-panel">
+          <h2 class="notion-h1">💰 실시간 여행 예산 & 가계부</h2>
+          
+          <div class="budget-overview-cards">
+            <div class="budget-card">
+              <span class="budget-card-title">총 예산 설정</span>
+              <span class="budget-card-value" id="budgetLimitVal">1,000,000 원</span>
+              <span class="budget-card-sub">✍️ 인풋박스에서 바로 수정 가능</span>
+            </div>
+            <div class="budget-card">
+              <span class="budget-card-title">현재 총 지출</span>
+              <span class="budget-card-value" id="budgetTotalSpentVal">0 원</span>
+              <span class="budget-card-sub" id="budgetRemainingWrapper">
+                <span>남은 예산:</span>
+                <span id="budgetRemainingVal">0 원</span>
+              </span>
+            </div>
+            <div class="budget-card">
+              <span class="budget-card-title">1인당 분담금</span>
+              <span class="budget-card-value" id="budgetPerPersonVal">0 원</span>
+              <span class="budget-card-sub" id="budgetPeopleCountWrapper">
+                <span>기준 동행자 수:</span>
+                <span id="budgetPeopleLabel">2 명</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- BUDGET CONTROLS -->
+          <div class="budget-controls">
+            <div class="notion-input-group">
+              <span class="notion-input-label">총 예산 (원)</span>
+              <input type="number" id="inputLimitBudget" class="notion-input notion-input-large" value="1000000" min="0" step="10000">
+            </div>
+            <div class="notion-input-group">
+              <span class="notion-input-label">인원수 (명)</span>
+              <input type="number" id="inputPeopleCount" class="notion-input" value="2" min="1">
+            </div>
+          </div>
+
+          <div class="budget-action-bar">
+            <h3 class="notion-h2">상세 지출 항목</h3>
+            <button id="openExpenseModalBtn" class="btn-add-expense">
+              <span>+</span> 지출 항목 추가
+            </button>
+          </div>
+
+          <!-- TABLE -->
+          <div class="notion-table-wrapper">
+            <table class="notion-table">
+              <thead>
+                <tr>
+                  <th>카테고리</th>
+                  <th>지출 항목명</th>
+                  <th>지출 금액</th>
+                  <th style="width: 60px; text-align: center;">삭제</th>
+                </tr>
+              </thead>
+              <tbody id="expenseTableBody">
+                <!-- Javascript will insert items here -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- CATEGORY CHART BREAKDOWN -->
+          <div class="category-breakdown">
+            <h3 class="category-breakdown-title">📊 카테고리별 지출 비율</h3>
+            <div class="category-progress-list">
+              
+              <div class="category-progress-item">
+                <span class="category-progress-label">✈️ 교통/항공</span>
+                <div class="category-progress-bar-wrapper">
+                  <div class="category-progress-bar tag-green" id="barTransport" style="width: 0%;"></div>
+                </div>
+                <span class="category-progress-val" id="valTransport">0원 (0%)</span>
+              </div>
+
+              <div class="category-progress-item">
+                <span class="category-progress-label">🏨 숙박</span>
+                <div class="category-progress-bar-wrapper">
+                  <div class="category-progress-bar tag-blue" id="barLodging" style="width: 0%;"></div>
+                </div>
+                <span class="category-progress-val" id="valLodging">0원 (0%)</span>
+              </div>
+
+              <div class="category-progress-item">
+                <span class="category-progress-label">🏎️ 액티비티</span>
+                <div class="category-progress-bar-wrapper">
+                  <div class="category-progress-bar tag-purple" id="barActivity" style="width: 0%;"></div>
+                </div>
+                <span class="category-progress-val" id="valActivity">0원 (0%)</span>
+              </div>
+
+              <div class="category-progress-item">
+                <span class="category-progress-label">🍔 식비</span>
+                <div class="category-progress-bar-wrapper">
+                  <div class="category-progress-bar tag-red" id="barFood" style="width: 0%;"></div>
+                </div>
+                <span class="category-progress-val" id="valFood">0원 (0%)</span>
+              </div>
+
+              <div class="category-progress-item">
+                <span class="category-progress-label">🎁 기타</span>
+                <div class="category-progress-bar-wrapper">
+                  <div class="category-progress-bar tag-gray" id="barOther" style="width: 0%;"></div>
+                </div>
+                <span class="category-progress-val" id="valOther">0원 (0%)</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 3: CHECKLIST ==================== -->
+        <div id="tabPanelChecklist" class="tab-panel">
+          <h2 class="notion-h1">🎒 노션형 준비물 체크리스트</h2>
+          
+          <div class="checklist-global-progress">
+            <div class="checklist-progress-text">
+              <span>전체 준비 완료율</span>
+              <span class="checklist-progress-pct" id="checklistProgressText">0% (0/0)</span>
+            </div>
+            <div class="checklist-progress-track">
+              <div class="checklist-progress-fill" id="checklistProgressBar"></div>
+            </div>
+          </div>
+
+          <div class="checklist-groups">
+            
+            <!-- Group 1 -->
+            <div class="checklist-group" id="chkGroupRequired">
+              <div class="checklist-group-header" data-group="required">
+                <div class="checklist-group-header-left">
+                  <span class="checklist-toggle-icon">▼</span>
+                  <span>🚨 필수 소지품 및 서류</span>
+                </div>
+                <span class="checklist-group-count" id="countRequired">0/3</span>
+              </div>
+              <div class="checklist-group-body">
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="required" checked>
+                  </span>
+                  <span class="checklist-item-text">신분증 및 운전면허증 (렌터카 운전자 필수)</span>
+                </label>
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="required">
+                  </span>
+                  <span class="checklist-item-text">비행기 탑승권 / 모바일 항공권 캡처</span>
+                </label>
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="required">
+                  </span>
+                  <span class="checklist-item-text">호텔 / 민박 예약 모바일 바우처 저장</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Group 2 -->
+            <div class="checklist-group" id="chkGroupClothes">
+              <div class="checklist-group-header" data-group="clothes">
+                <div class="checklist-group-header-left">
+                  <span class="checklist-toggle-icon">▼</span>
+                  <span>🏊 수영 및 의류 관련 (계곡 & 풀파티)</span>
+                </div>
+                <span class="checklist-group-count" id="countClothes">0/4</span>
+              </div>
+              <div class="checklist-group-body">
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="clothes">
+                  </span>
+                  <span class="checklist-item-text">인피니티 풀 수영복 / 계곡 물놀이용 래시가드</span>
+                </label>
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="clothes">
+                  </span>
+                  <span class="checklist-item-text">비치웨어 및 민박용 간편복</span>
+                </label>
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="clothes">
+                  </span>
+                  <span class="checklist-item-text">선글라스 및 자외선 차단 선크림</span>
+                </label>
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="clothes">
+                  </span>
+                  <span class="checklist-item-text">아쿠아 슈즈 / 슬리퍼</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Group 3 -->
+            <div class="checklist-group" id="chkGroupLeisure">
+              <div class="checklist-group-header" data-group="leisure">
+                <div class="checklist-group-header-left">
+                  <span class="checklist-toggle-icon">▼</span>
+                  <span>🏎️ 레저 및 액티비티 용품</span>
+                </div>
+                <span class="checklist-group-count" id="countLeisure">0/3</span>
+              </div>
+              <div class="checklist-group-body">
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="leisure">
+                  </span>
+                  <span class="checklist-item-text">운동화 및 편한 의류 (레일바이크, 다이나믹메이즈 필수)</span>
+                </label>
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="leisure">
+                  </span>
+                  <span class="checklist-item-text">계곡 돗자리 및 시원한 수박 보관 쿨러백</span>
+                </label>
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="leisure">
+                  </span>
+                  <span class="checklist-item-text">방수팩 (계곡 및 하도리 카약 탑승 대비)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Group 4 -->
+            <div class="checklist-group" id="chkGroupTech">
+              <div class="checklist-group-header" data-group="tech">
+                <div class="checklist-group-header-left">
+                  <span class="checklist-toggle-icon">▼</span>
+                  <span>🔋 전자기기 및 화장품</span>
+                </div>
+                <span class="checklist-group-count" id="countTech">0/3</span>
+              </div>
+              <div class="checklist-group-body">
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="tech">
+                  </span>
+                  <span class="checklist-item-text">보조배터리 및 스마트폰 고속 충전기</span>
+                </label>
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="tech">
+                  </span>
+                  <span class="checklist-item-text">삼각대 또는 셀카봉 (계곡/바다 사진용)</span>
+                </label>
+                <label class="checklist-item">
+                  <span class="checklist-checkbox-wrapper">
+                    <input type="checkbox" class="checklist-checkbox" data-group="tech">
+                  </span>
+                  <span class="checklist-item-text">개인 화장품 및 계곡물 세척용 물티슈</span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==================== TAB 4: FOOD & CAFE ==================== -->
+        <div id="tabPanelFood" class="tab-panel">
+          <h2 class="notion-h1">🍽️ 서귀포 & 구좌읍 동부 맛집 가이드</h2>
+          
+          <div class="board-filter-bar">
+            <div class="board-filter-tabs">
+              <button class="board-filter-tab active" data-filter="all">전체보기</button>
+              <button class="board-filter-tab" data-filter="food">🍽️ 맛집</button>
+              <button class="board-filter-tab" data-filter="cafe">🍹 카페</button>
+            </div>
+            
+            <div class="notion-input-group" style="padding: 4px 10px;">
+              <span class="notion-input-label">검색:</span>
+              <input type="text" id="foodSearchInput" class="notion-input" style="width: 140px; font-weight: normal;" placeholder="가게명 또는 메뉴...">
+            </div>
+          </div>
+
+          <div class="board-grid" id="foodBoardGrid">
+            <!-- Dynamic elements loaded via JS -->
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- EXPENSE ADD MODAL -->
+  <div id="expenseModal" class="modal-overlay">
+    <div class="notion-modal">
+      <div class="modal-header">
+        <h3 class="modal-title">💰 지출 항목 추가</h3>
+        <button id="closeExpenseModalBtn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="modal-form-group">
+          <label for="modalSelectCategory" class="modal-label">카테고리</label>
+          <select id="modalSelectCategory" class="modal-select">
+            <option value="transport">✈️ 교통/항공</option>
+            <option value="lodging">🏨 숙박</option>
+            <option value="activity">🏎️ 액티비티</option>
+            <option value="food">🍔 식비</option>
+            <option value="other">🎁 기타</option>
+          </select>
+        </div>
+
+        <div class="modal-form-group">
+          <label for="modalInputTitle" class="modal-label">지출 항목명</label>
+          <input type="text" id="modalInputTitle" class="modal-input" placeholder="예: 숙성도 중문점 흑돼지">
+        </div>
+
+        <div class="modal-form-group">
+          <label for="modalInputCost" class="modal-label">지출 금액 (원)</label>
+          <input type="number" id="modalInputCost" class="modal-input" placeholder="0" min="0" step="1000">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button id="cancelExpenseBtn" class="btn-secondary">취소</button>
+        <button id="submitExpenseBtn" class="btn-add-expense">추가하기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
