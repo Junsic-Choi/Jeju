@@ -11,13 +11,12 @@ let state = {
     { id: '4', category: 'lodging', title: '구좌읍 삼일삼오 민박 (1박)', cost: 100000 },
     { id: '5', category: 'activity', title: '둘째날 윈드 1947 카트 (2인)', cost: 50000 },
     { id: '7', category: 'activity', title: '둘째날 월간레코드 입장권 (2인)', cost: 30000 },
-    { id: '8', category: 'activity', title: '셋째날 하도리 카약 레저 (2인)', cost: 30000 },
     { id: '9', category: 'food', title: '첫날 점심 하갈비국수', cost: 35000 },
     { id: '10', category: 'food', title: '첫날 저녁 숙성도 흑돼지', cost: 85000 },
     { id: '11', category: 'food', title: '둘째날 마트 수박 & 과일칼 장보기', cost: 25000 },
     { id: '12', category: 'food', title: '둘째날 점심 삼보식당', cost: 40000 },
     { id: '13', category: 'food', title: '둘째날 저녁 평대리 벵디', cost: 38000 },
-    { id: '14', category: 'food', title: '셋째날 점심 갈치공장 (순살갈치조림)', cost: 40000 }
+    { id: '14', category: 'food', title: '셋째날 점심 함덕 계절식탁 (순살갈치조림)', cost: 40000 }
   ],
   checklist: JSON.parse(localStorage.getItem('jeju_checklist')) || {},
   foodFilter: 'all',
@@ -46,10 +45,10 @@ const routeData = {
   day3: [
     { lat: 33.5228, lng: 126.9015, name: '삼일삼오 민박 🏡', desc: '09:20 체크아웃' },
     { lat: 33.5244, lng: 126.8524, name: '세화리 보말칼국수 🍜', desc: '09:30 개운하고 녹진한 아침 식사' },
-    { lat: 33.5262, lng: 126.8970, name: '하도해변 투명카약 🛶', desc: '10:45 에메랄드빛 맑은 물 위 카약 체험' },
-    { lat: 33.5385, lng: 126.8490, name: '갈치공장 🐟', desc: '12:00 맛있는 순살갈치조림 점심' },
-    { lat: 33.4019, lng: 126.6455, name: '사려니숲길 🌲', desc: '13:40 울창한 삼나무 숲길 피톤치드 힐링 산책' },
-    { lat: 33.5435, lng: 126.6690, name: '카페 델문도 ☕', desc: '15:10 함덕 해변 모래사장 위 핫플 카페' },
+    { lat: 33.4646, lng: 126.7820, name: '송당 동화마을 🌸', desc: '10:45 감성 정원 산책 & 웅장한 연못 뷰' },
+    { lat: 33.4019, lng: 126.6455, name: '사려니숲길 🌲', desc: '12:30 울창한 삼나무 숲길 피톤치드 힐링 산책' },
+    { lat: 33.5428, lng: 126.6680, name: '계절식탁 함덕점 🐟', desc: '14:15 바다 전망 가시 없는 순살갈치조림 점심' },
+    { lat: 33.5435, lng: 126.6690, name: '카페 델문도 ☕', desc: '15:20 함덕 해변 모래사장 위 핫플 카페' },
     { lat: 33.5113, lng: 126.4930, name: '제주국제공항 ✈️', desc: '16:30 렌터카 반납 후 서울 복귀 출발' }
   ]
 };
