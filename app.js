@@ -11,11 +11,11 @@ let state = {
     { id: '4', category: 'lodging', title: '구좌읍 삼일삼오 민박 (1박)', cost: 100000 },
     { id: '5', category: 'activity', title: '둘째날 윈드 1947 카트 (2인)', cost: 50000 },
     { id: '7', category: 'activity', title: '둘째날 월간레코드 입장권 (2인)', cost: 30000 },
-    { id: '9', category: 'food', title: '첫날 점심 하갈비국수', cost: 35000 },
+    { id: '9', category: 'food', title: '첫날 점심 애월 언덕집국수', cost: 35000 },
     { id: '10', category: 'food', title: '첫날 저녁 숙성도 흑돼지', cost: 85000 },
     { id: '11', category: 'food', title: '둘째날 마트 수박 & 과일칼 장보기', cost: 25000 },
     { id: '12', category: 'food', title: '둘째날 점심 삼보식당', cost: 40000 },
-    { id: '13', category: 'food', title: '둘째날 저녁 평대리 벵디', cost: 38000 },
+    { id: '13', category: 'food', title: '둘째날 저녁 구좌 소금바치 순이네', cost: 38000 },
     { id: '14', category: 'food', title: '셋째날 점심 함덕 계절식탁 (순살갈치조림)', cost: 40000 }
   ],
   checklist: JSON.parse(localStorage.getItem('jeju_checklist')) || {},
@@ -28,7 +28,7 @@ let state = {
 const routeData = {
   day1: [
     { lat: 33.5113, lng: 126.4930, name: '제주국제공항 ✈️', desc: '11:00 도착 및 제주야렌트카 인수' },
-    { lat: 33.4624, lng: 126.3101, name: '하갈비국수 🍜', desc: '12:30 애월 해안 오션뷰 점심' },
+    { lat: 33.4615, lng: 126.3245, name: '애월 언덕집국수 🍜', desc: '12:30 애월 해안도로 고기국수 점심' },
     { lat: 33.2530, lng: 126.4082, name: '히든클리프 호텔 🏨', desc: '14:30 체크인 & 인피니티 풀 수영' },
     { lat: 33.2541, lng: 126.4172, name: '숙성도 중문점 🥩', desc: '18:30 육즙 가득 흑돼지 저녁' }
   ],
@@ -40,7 +40,7 @@ const routeData = {
     { lat: 33.2825, lng: 126.6025, name: '윈드 1947 카트 🏎️', desc: '14:00 한라산 뷰 스릴 가득 카트 레이싱' },
     { lat: 33.4682, lng: 126.9360, name: '월간레코드 🎵', desc: '16:30 성산일출봉 오션뷰 LP 청음' },
     { lat: 33.5228, lng: 126.9015, name: '삼일삼오 민박 🏡', desc: '18:30 구좌읍 돌담 감성 숙소 체크인' },
-    { lat: 33.5410, lng: 126.8289, name: '평대 벵디 돌문어 🐙', desc: '19:00 매콤 쫄깃한 돌문어 덮밥 저녁' }
+    { lat: 33.4839, lng: 126.9023, name: '구좌 소금바치 순이네 🐙', desc: '19:00 매콤달콤 불맛 가득 돌문어볶음 저녁' }
   ],
   day3: [
     { lat: 33.5228, lng: 126.9015, name: '삼일삼오 민박 🏡', desc: '09:20 체크아웃' },
@@ -77,14 +77,14 @@ const foodData = [
   },
   {
     id: 'food_2',
-    name: '평대리 벵디 (구좌읍 평대리)',
+    name: '소금바치 순이네 (구좌읍 종달리)',
     category: 'food',
     emoji: '🐙',
-    rating: 4.5,
-    desc: '돌담 너머 펼쳐진 잔잔한 구좌 바다를 보며 쫄깃한 돌문어 덮밥과 뿔소라톳덮밥 등 특색 있는 해물 덮밥을 즐기는 곳.',
-    menu: '돌문어덮밥, 돌문어물회, 반반덮밥',
-    price: '15,000원 ~ 20,000원',
-    mapUrl: 'https://map.naver.com/v5/search/평대%20벵디'
+    rating: 4.8,
+    desc: '깻잎향 솔솔 나는 불맛 가득 돌문어볶음 전문점. 양념에 소면을 비벼 먹고 밥까지 비벼 먹는 최고의 마성의 맛집.',
+    menu: '돌문어볶음, 한치물회, 갈치조림',
+    price: '30,000원 ~ 50,000원',
+    mapUrl: 'https://map.naver.com/v5/search/소금바치순이네'
   },
   {
     id: 'food_3',
