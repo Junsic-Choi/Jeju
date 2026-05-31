@@ -1237,6 +1237,19 @@ body {
   
   .sidebar-toggle-btn {
     display: flex;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    bottom: auto;
+    left: auto;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background-color: var(--callout-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 16px;
+    box-shadow: var(--shadow-sm);
   }
   
   .notion-cover {
@@ -1265,7 +1278,93 @@ body {
   }
   
   .notion-body {
-    padding: 0 20px 60px 20px;
+    padding: 0 20px 100px 20px;
+  }
+
+  /* Map responsiveness */
+  #routeMap {
+    height: 280px !important;
+  }
+
+  /* Budget component mobile adjustments */
+  .budget-overview-cards {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+  }
+  
+  .budget-card {
+    padding: 12px;
+  }
+  
+  .budget-card-value {
+    font-size: 16px;
+  }
+  
+  .budget-controls {
+    flex-direction: row;
+    gap: 8px;
+  }
+  
+  .budget-controls .notion-input-group {
+    flex: 1;
+    justify-content: space-between;
+    padding: 6px 10px;
+  }
+  
+  .budget-controls .notion-input {
+    width: 60px;
+    text-align: right;
+  }
+  
+  .notion-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .expense-cost-input {
+    width: 85px !important;
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+  
+  .notion-table th, .notion-table td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  /* Timeline mobile compactness */
+  .timeline-container {
+    padding-left: 12px;
+  }
+  
+  .timeline-item {
+    padding-left: 14px;
+  }
+  
+  .timeline-container::before {
+    left: 3px;
+  }
+  
+  .timeline-item-marker {
+    left: -13px;
+    width: 8px;
+    height: 8px;
+    border-width: 2px;
+  }
+  
+  .timeline-card {
+    padding: 12px;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  
+  .card-tags {
+    align-self: flex-start;
+    margin-left: 0;
   }
 }
 
@@ -1367,6 +1466,74 @@ body {
 /* Hide spin buttons for Firefox */
 .expense-cost-input {
   -moz-appearance: textfield;
+}
+
+/* Sidebar Overlay for Mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 95;
+  transition: opacity 0.25s ease;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* Mobile Bottom Navigation Bar */
+.mobile-bottom-nav {
+  display: none; /* hidden on desktop */
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: var(--sidebar-bg);
+    border-top: 1px solid var(--border-color);
+    z-index: 150;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .mobile-bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    flex: 1;
+    height: 100%;
+    gap: 3px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    transition: color var(--transition-speed);
+  }
+
+  .mobile-bottom-nav .nav-item.active {
+    color: var(--accent-color);
+    font-weight: 700;
+  }
+
+  .mobile-bottom-nav .nav-icon {
+    font-size: 18px;
+  }
 }
 
 

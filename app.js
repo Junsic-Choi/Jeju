@@ -201,39 +201,64 @@ function updateThemeUI() {
 }
 
 // 2. TAB MANAGEMENT
+function switchTab(targetTab) {
+  state.activeTab = targetTab;
+
+  // Update Sidebar UI
+  const menuItems = document.querySelectorAll('.menu-item');
+  menuItems.forEach(m => {
+    if (m.getAttribute('data-tab') === targetTab) {
+      m.classList.add('active');
+    } else {
+      m.classList.remove('active');
+    }
+  });
+
+  // Update Bottom Nav UI
+  const navItems = document.querySelectorAll('.mobile-bottom-nav .nav-item');
+  navItems.forEach(n => {
+    if (n.getAttribute('data-tab') === targetTab) {
+      n.classList.add('active');
+    } else {
+      n.classList.remove('active');
+    }
+  });
+
+  // Update Panels UI
+  const panels = document.querySelectorAll('.tab-panel');
+  panels.forEach(panel => {
+    panel.classList.remove('active');
+    if (panel.id === `tabPanel${capitalize(targetTab)}`) {
+      panel.classList.add('active');
+    }
+  });
+
+  // Special layout trigger for Leaflet Map resizing when timeline panel is activated
+  if (targetTab === 'timeline' && map) {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 150);
+  }
+
+  // Close sidebar on mobile
+  const sidebar = document.getElementById('appSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  if (sidebar) sidebar.classList.remove('open');
+  if (overlay) overlay.classList.remove('active');
+}
+
 function initTabs() {
   const menuItems = document.querySelectorAll('.menu-item');
-  const panels = document.querySelectorAll('.tab-panel');
-
   menuItems.forEach(item => {
     item.addEventListener('click', () => {
-      const targetTab = item.getAttribute('data-tab');
-      
-      // Update state
-      state.activeTab = targetTab;
+      switchTab(item.getAttribute('data-tab'));
+    });
+  });
 
-      // Update Sidebar UI
-      menuItems.forEach(m => m.classList.remove('active'));
-      item.classList.add('active');
-
-      // Update Panels UI
-      panels.forEach(panel => {
-        panel.classList.remove('active');
-        if (panel.id === `tabPanel${capitalize(targetTab)}`) {
-          panel.classList.add('active');
-        }
-      });
-
-      // Special layout trigger for Leaflet Map resizing when timeline panel is activated
-      if (targetTab === 'timeline' && map) {
-        setTimeout(() => {
-          map.invalidateSize();
-        }, 150);
-      }
-
-      // On mobile, close sidebar after clicking item
-      const sidebar = document.getElementById('appSidebar');
-      sidebar.classList.remove('open');
+  const navItems = document.querySelectorAll('.mobile-bottom-nav .nav-item');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      switchTab(item.getAttribute('data-tab'));
     });
   });
 }
@@ -767,16 +792,30 @@ function renderFoodBoard() {
 function initSidebarMobile() {
   const toggleBtn = document.getElementById('sidebarToggleBtn');
   const sidebar = document.getElementById('appSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
 
-  toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-  });
+  const toggleSidebar = () => {
+    const isOpen = sidebar.classList.toggle('open');
+    if (isOpen) {
+      overlay.classList.add('active');
+    } else {
+      overlay.classList.remove('active');
+    }
+  };
+
+  const closeSidebar = () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+  };
+
+  toggleBtn.addEventListener('click', toggleSidebar);
+  overlay.addEventListener('click', closeSidebar);
 
   // Close sidebar clicking outside on mobile
   document.addEventListener('click', (e) => {
     if (window.innerWidth <= 768) {
-      if (!sidebar.contains(e.target) && e.target !== toggleBtn) {
-        sidebar.classList.remove('open');
+      if (!sidebar.contains(e.target) && e.target !== toggleBtn && e.target !== overlay) {
+        closeSidebar();
       }
     }
   });
