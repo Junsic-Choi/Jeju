@@ -479,7 +479,12 @@ function renderExpenses() {
     tr.innerHTML = `
       <td>${catBadge}</td>
       <td style="font-weight: 500;">${escapeHTML(item.title)}</td>
-      <td style="font-weight: 600;">${formatNumber(item.cost)} 원</td>
+      <td>
+        <div style="display: flex; align-items: center; justify-content: flex-start; gap: 4px;">
+          <input type="number" class="expense-cost-input" data-id="${item.id}" value="${item.cost}" min="0" step="1000">
+          <span style="font-weight: 600; color: var(--text-color);">원</span>
+        </div>
+      </td>
       <td style="text-align: center;">
         <button class="expense-delete-btn" data-id="${item.id}" aria-label="삭제">
           🗑️
@@ -488,6 +493,35 @@ function renderExpenses() {
     `;
 
     tbody.appendChild(tr);
+  });
+
+  // Attach edit events
+  const costInputs = tbody.querySelectorAll('.expense-cost-input');
+  costInputs.forEach(input => {
+    input.addEventListener('input', (e) => {
+      const id = input.getAttribute('data-id');
+      const val = parseInt(input.value) || 0;
+      
+      // Update state in memory
+      state.expenses = state.expenses.map(item => {
+        if (item.id === id) {
+          return { ...item, cost: val };
+        }
+        return item;
+      });
+      
+      calculateBudget();
+    });
+
+    input.addEventListener('change', () => {
+      saveExpenses();
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        input.blur();
+      }
+    });
   });
 
   // Attach delete events
