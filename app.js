@@ -6,7 +6,7 @@ let state = {
   peopleCount: parseInt(localStorage.getItem('jeju_people_count')) || 2,
   expenses: JSON.parse(localStorage.getItem('jeju_expenses')) || [
     { id: '1', category: 'transport', title: '왕복 항공권 (2인)', cost: 180000 },
-    { id: '2', category: 'transport', title: '렌터카 3일 완전자차', cost: 90000 },
+    { id: '2', category: 'transport', title: '제주야렌트카 3일 완전자차', cost: 90000 },
     { id: '3', category: 'lodging', title: '히든클리프 호텔 (1박)', cost: 210000 },
     { id: '4', category: 'lodging', title: '구좌읍 삼일삼오 민박 (1박)', cost: 100000 },
     { id: '5', category: 'activity', title: '둘째날 윈드 1947 카트 (2인)', cost: 50000 },
@@ -27,7 +27,7 @@ let state = {
 // Map & Route Coordinates Data
 const routeData = {
   day1: [
-    { lat: 33.5113, lng: 126.4930, name: '제주국제공항 ✈️', desc: '11:00 도착 및 렌터카 인수' },
+    { lat: 33.5113, lng: 126.4930, name: '제주국제공항 ✈️', desc: '11:00 도착 및 제주야렌트카 인수' },
     { lat: 33.4624, lng: 126.3101, name: '하갈비국수 🍜', desc: '12:30 애월 해안 오션뷰 점심' },
     { lat: 33.2530, lng: 126.4082, name: '히든클리프 호텔 🏨', desc: '14:30 체크인 & 인피니티 풀 수영' },
     { lat: 33.2541, lng: 126.4172, name: '숙성도 중문점 🥩', desc: '18:30 육즙 가득 흑돼지 저녁' }
@@ -49,7 +49,7 @@ const routeData = {
     { lat: 33.4019, lng: 126.6455, name: '사려니숲길 🌲', desc: '12:30 울창한 삼나무 숲길 피톤치드 힐링 산책' },
     { lat: 33.5428, lng: 126.6680, name: '계절식탁 함덕점 🐟', desc: '14:15 바다 전망 가시 없는 순살갈치조림 점심' },
     { lat: 33.5435, lng: 126.6690, name: '카페 델문도 ☕', desc: '15:20 함덕 해변 모래사장 위 핫플 카페' },
-    { lat: 33.5113, lng: 126.4930, name: '제주국제공항 ✈️', desc: '16:30 렌터카 반납 후 서울 복귀 출발' }
+    { lat: 33.5113, lng: 126.4930, name: '제주국제공항 ✈️', desc: '16:30 제주야렌트카 반납 후 서울 복귀 출발' }
   ]
 };
 
