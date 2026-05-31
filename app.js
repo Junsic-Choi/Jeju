@@ -72,7 +72,7 @@ const foodData = [
     desc: '수요미식회 출연한 전국구 전복 요리 전문점. 뜨거운 전복돌솥밥에 물을 부어 구수하게 누룽지까지 비우는 코스.',
     menu: '전복돌솥밥, 전복구이, 전복죽',
     price: '15,000원 ~ 40,000원',
-    mapUrl: 'https://map.naver.com'
+    mapUrl: 'https://map.naver.com/v5/search/명진전복'
   },
   {
     id: 'food_2',
@@ -83,7 +83,7 @@ const foodData = [
     desc: '돌담 너머 펼쳐진 잔잔한 구좌 바다를 보며 쫄깃한 돌문어 덮밥과 뿔소라톳덮밥 등 특색 있는 해물 덮밥을 즐기는 곳.',
     menu: '돌문어덮밥, 돌문어물회, 반반덮밥',
     price: '15,000원 ~ 20,000원',
-    mapUrl: 'https://map.naver.com'
+    mapUrl: 'https://map.naver.com/v5/search/벵디'
   },
   {
     id: 'food_3',
@@ -94,7 +94,7 @@ const foodData = [
     desc: '뼈등심과 삼겹살이 입안에서 팡팡 터지는 최고의 숙성 흑돼지 구이집. 테이블링/캐치테이블 원격 줄서기 필수.',
     menu: '교차숙성 흑돼지, 뼈등심, 960숙성 뼈목살',
     price: '60,000원 ~ 100,000원',
-    mapUrl: 'https://map.naver.com'
+    mapUrl: 'https://map.naver.com/v5/search/숙성도%20중문점'
   },
   {
     id: 'cafe_1',
@@ -105,7 +105,7 @@ const foodData = [
     desc: '함덕 에메랄드빛 해변 모래사장 위에 지어져 비행기 탑승 전 동부 해안의 마지막 낭만을 한눈에 품을 수 있는 베이커리 핫플.',
     menu: '델문도 아인슈페너, 제주 마늘바게트, 한라봉팡도르',
     price: '7,500원 ~ 12,000원',
-    mapUrl: 'https://map.naver.com'
+    mapUrl: 'https://map.naver.com/v5/search/카페델문도'
   },
   {
     id: 'food_4',
@@ -116,7 +116,7 @@ const foodData = [
     desc: '서귀포 바다를 정면으로 마주하는 평상에서 제철 한치물회나 뼈째 씹는 구수한 자리돔물회를 신선한 바람 속에 먹는 로컬 해녀집.',
     menu: '한치물회(냉동/생물), 자리돔물회, 갈치조림',
     price: '15,000원 ~ 40,000원',
-    mapUrl: 'https://map.naver.com'
+    mapUrl: 'https://map.naver.com/v5/search/보목해녀의집'
   },
   {
     id: 'cafe_2',
@@ -127,7 +127,7 @@ const foodData = [
     desc: '세화리 해변 안쪽 골목에 자리 잡은 고요한 원목 인테리어 감성 카페. 독서나 조용히 대화하기 좋으며 수제 구움과자가 매력.',
     menu: '핸드드립 필터커피, 바닐라 타르트, 마들렌',
     price: '6,000원 ~ 9,000원',
-    mapUrl: 'https://map.naver.com'
+    mapUrl: 'https://map.naver.com/v5/search/카페무크'
   },
   {
     id: 'food_5',
@@ -138,7 +138,7 @@ const foodData = [
     desc: '공항에서 애월 해안을 경유해 내려가는 서부 도로변 오션뷰 고기국수 전문점. 깔끔하고 시원한 육수가 일품.',
     menu: '고기국수, 갈비비빔국수, 돔베고기',
     price: '11,000원 ~ 15,000원',
-    mapUrl: 'https://map.naver.com'
+    mapUrl: 'https://map.naver.com/v5/search/하갈비국수'
   },
   {
     id: 'cafe_3',
@@ -149,7 +149,7 @@ const foodData = [
     desc: '중문색달해변 해안 절벽 선셋 카페 & 펍. 발리풍의 이국적인 대형 야외 테이블과 화려한 음악이 어우러진 힙플레이스.',
     menu: '색달 펀치(무알콜), 한라산 스무디, 현무암 피자',
     price: '9,500원 ~ 22,000원',
-    mapUrl: 'https://map.naver.com'
+    mapUrl: 'https://map.naver.com/v5/search/더클리프'
   }
 ];
 
