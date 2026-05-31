@@ -11,13 +11,14 @@ let state = {
     { id: '4', category: 'lodging', title: '구좌읍 삼일삼오 민박 (1박)', cost: 100000 },
     { id: '5', category: 'activity', title: '둘째날 다이나믹 메이즈 (2인)', cost: 38000 },
     { id: '6', category: 'activity', title: '둘째날 레일바이크 예약 (2인)', cost: 30000 },
-    { id: '7', category: 'activity', title: '셋째날 하도리 카약 레저 (2인)', cost: 30000 },
-    { id: '8', category: 'food', title: '첫날 점심 하갈비국수', cost: 35000 },
-    { id: '9', category: 'food', title: '첫날 저녁 숙성도 흑돼지', cost: 85000 },
-    { id: '10', category: 'food', title: '둘째날 계곡 수박 및 간식', cost: 20000 },
-    { id: '11', category: 'food', title: '둘째날 점심 삼보식당', cost: 40000 },
-    { id: '12', category: 'food', title: '둘째날 저녁 평대리 벵디', cost: 38000 },
-    { id: '13', category: 'food', title: '셋째날 점심 명진전복', cost: 45000 }
+    { id: '7', category: 'activity', title: '둘째날 로미뮤직하우스 입장권 (2인)', cost: 30000 },
+    { id: '8', category: 'activity', title: '셋째날 하도리 카약 레저 (2인)', cost: 30000 },
+    { id: '9', category: 'food', title: '첫날 점심 하갈비국수', cost: 35000 },
+    { id: '10', category: 'food', title: '첫날 저녁 숙성도 흑돼지', cost: 85000 },
+    { id: '11', category: 'food', title: '둘째날 마트 수박 & 과일칼 장보기', cost: 25000 },
+    { id: '12', category: 'food', title: '둘째날 점심 삼보식당', cost: 40000 },
+    { id: '13', category: 'food', title: '둘째날 저녁 평대리 벵디', cost: 38000 },
+    { id: '14', category: 'food', title: '셋째날 점심 갈치공장 (순살갈치조림)', cost: 40000 }
   ],
   checklist: JSON.parse(localStorage.getItem('jeju_checklist')) || {},
   foodFilter: 'all',
@@ -37,16 +38,17 @@ const routeData = {
     { lat: 33.2530, lng: 126.4082, name: '히든클리프 호텔 🍳', desc: '08:30 조식 후 체크아웃' },
     { lat: 33.2427, lng: 126.4795, name: '강정교 (강정천) 🍉', desc: '10:00 계곡 그늘 시원한 물놀이 & 수박 힐링' },
     { lat: 33.2488, lng: 126.5606, name: '삼보식당 뚝배기 🍲', desc: '12:30 든든한 한식 노포 점심' },
-    { lat: 33.4116, lng: 126.7909, name: '다이나믹 메이즈 🏃', desc: '14:30 실내 탈출 메이즈 액티비티' },
-    { lat: 33.4542, lng: 126.8378, name: '제주 레일바이크 🚲', desc: '16:30 용눈이오름 목초지 바람 가르기' },
-    { lat: 33.5228, lng: 126.9015, name: '삼일삼오 민박 🏡', desc: '18:00 구좌읍 돌담 감성 숙소 체크인' },
-    { lat: 33.5298, lng: 126.8530, name: '평대 벵디 돌문어 🐙', desc: '19:00 매콤 쫄깃한 돌문어 덮밥 저녁' }
+    { lat: 33.2801, lng: 126.7188, name: '로미뮤직하우스 🎵', desc: '14:00 남원 감성 가득 LP 음악 청음' },
+    { lat: 33.4116, lng: 126.7909, name: '다이나믹 메이즈 🏃', desc: '16:00 실내 탈출 메이즈 액티비티' },
+    { lat: 33.4542, lng: 126.8378, name: '제주 레일바이크 🚲', desc: '17:30 용눈이오름 목초지 바람 가르기' },
+    { lat: 33.5228, lng: 126.9015, name: '삼일삼오 민박 🏡', desc: '19:00 구좌읍 돌담 감성 숙소 체크인' },
+    { lat: 33.5298, lng: 126.8530, name: '평대 벵디 돌문어 🐙', desc: '19:30 매콤 쫄깃한 돌문어 덮밥 저녁' }
   ],
   day3: [
     { lat: 33.5228, lng: 126.9015, name: '삼일삼오 민박 🏡', desc: '09:30 체크아웃' },
     { lat: 33.5244, lng: 126.8524, name: '세화리 보말칼국수 🍜', desc: '09:40 개운하고 녹진한 아침 식사' },
     { lat: 33.5262, lng: 126.8970, name: '하도해변 투명카약 🛶', desc: '11:00 에메랄드빛 맑은 물 위 카약 & 패들보드' },
-    { lat: 33.5398, lng: 126.8384, name: '명진전복 🍲', desc: '13:00 전국구 갓 지은 전복돌솥밥 점심' },
+    { lat: 33.5385, lng: 126.8490, name: '갈치공장 🐟', desc: '13:00 맛있는 순살갈치조림 점심' },
     { lat: 33.5435, lng: 126.6690, name: '카페 델문도 ☕', desc: '15:00 함덕 해변 모래사장 위 핫플 카페' },
     { lat: 33.5113, lng: 126.4930, name: '제주국제공항 ✈️', desc: '16:30 렌터카 반납 후 서울 복귀 출발' }
   ]
